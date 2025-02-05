@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { searchCharacters } from "../../api/api";
+import React, {useEffect, useState} from 'react';
+import {searchCharacters} from "../../api/api";
 import {ApiResponse} from "../../api/types";
 import s from "./Input.module.css"
 
@@ -8,28 +8,34 @@ interface InputProps {
     setError: (errorMessage: string) => void;
 }
 
-export const Input = ({ onSearch, setError }: InputProps) => {
+export const Input = ({onSearch, setError}: InputProps) => {
     const [enteredLetters, setEnteredLetters] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [lastQuery, setLastQuery] = useState<string>('');
 
     useEffect(() => {
         if (enteredLetters.length >= 3 && enteredLetters !== lastQuery) {
-            const timer = setTimeout(() => {
-                setIsLoading(true);
-                searchCharacters(enteredLetters)
-                    .then(data => {
-                        onSearch(data);
-                        setLastQuery(enteredLetters);
-                        setIsLoading(false);
-                    })
-                    .catch(err => {
-                        setError(err.message);
-                        setIsLoading(false);
-                    });
-            }, 500);
+            const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
-            return () => clearTimeout(timer);
+            const fetchData = async () => {
+                await delay(500); // Задержка перед запросом
+                setIsLoading(true);
+                try {
+                    const data = await searchCharacters(enteredLetters);
+                    onSearch(data);
+                    setLastQuery(enteredLetters);
+                } catch (err) {
+                    if (err instanceof Error) {
+                        setError(err.message);
+                    } else {
+                        setError("An unknown error occurred");
+                    }
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+
+            fetchData();
         } else if (enteredLetters.length < 3) {
             setIsLoading(false);
         }
