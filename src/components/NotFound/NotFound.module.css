@@ -1,0 +1,13 @@
+.error{
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    padding: 10px;
+    text-align: center;
+    color: rgba(101, 110, 194, 0.77);
+    width: 100%;
+    font-size: 28px;
+    @media (min-width: 1441px) {
+        font-size: 40px;
+    }
+}

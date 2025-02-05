@@ -1,0 +1,78 @@
+.charactersContainer{
+    padding: 0 162px 300px 162px;
+    @media (max-width: 1024px) {
+        padding: 0 80px 100px 80px;
+    }
+    @media (max-width: 425px) {
+        padding: 0 60px 80px 60px;
+    }
+    @media (max-width: 375px) {
+        padding: 0 40px 60px 40px;
+    }
+}
+.charactersCount{
+    font-family: Arial, sans-serif;
+    font-weight: 300;
+    width: 100%;
+    padding-left: 32vw;
+    margin: 13px 0 67px 0;
+    color: #282626;
+    @media (max-width: 1920px) {
+        padding-left: 26vw;
+    }
+    @media (max-width: 1920px) {
+        padding-left: 26vw;
+    }
+    @media (max-width: 1440px) {
+        padding-left: 18vw;
+    }
+    @media (max-width: 1024px) {
+        padding-left: 12vw;
+    }
+    @media (max-width: 768px) {
+        padding-left: 19vw;
+        margin-bottom: 30px;
+    }
+    @media (max-width: 425px) {
+        padding-left: 2vw;
+    }
+}
+
+
+.charactersList li{
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+.charactersList li:hover{
+    box-shadow: 8px 8px 16px rgba(101, 110, 194, 0.3);
+    border: 1px solid rgba(101, 110, 194, 0.83);
+    transition: box-shadow 0.3s ease-in-out;
+}
+.charactersList {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto;
+    gap: 10px;
+    list-style-type: none;
+}
+
+.charactersList li:nth-child(1),
+.charactersList li:nth-child(2) {
+    height: 262px;
+    grid-column: span 3;
+    @media (max-width: 768px) {
+        grid-column: span 6;
+        height: 150px;
+    }
+}
+
+.charactersList li:nth-child(n+3) {
+    height: 150px;
+    grid-column: span 2;
+    @media (max-width: 1024px) {
+        grid-column: span 3;
+    }
+    @media (max-width: 768px) {
+        grid-column: span 6;
+    }
+}
